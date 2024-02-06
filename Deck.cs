@@ -6,7 +6,7 @@ namespace RaceTo21
 {
     public class Deck
     {
-        List<string> cards = new List<string>();
+        List<Card> cards = new List<Card>();
 
         public Deck()
         {
@@ -18,25 +18,46 @@ namespace RaceTo21
                 foreach (string cardSuit in suits)
                 {
                     string cardName;
+                    string cardFullName;
                     switch (cardVal)
                     {
                         case 1:
                             cardName = "A";
+                            cardFullName = "Ace of";
                             break;
                         case 11:
                             cardName = "J";
+                            cardFullName = "Jack of";
                             break;
                         case 12:
                             cardName = "Q";
+                            cardFullName = "Queen of";
                             break;
                         case 13:
                             cardName = "K";
+                            cardFullName ="King of";
                             break;
                         default:
                             cardName = cardVal.ToString();
+                            cardFullName = cardVal.ToString() + "of";
                             break;
                     }
-                    cards.Add(cardName + cardSuit);
+                    switch (cardSuit)
+                    {
+                        case "S":
+                            cardFullName += "Spade";
+                            break;
+                        case "H":
+                            cardFullName += "Heart";
+                            break;
+                        case "C":
+                            cardFullName += "Club";
+                            break;
+                        case "D":
+                            cardFullName += "Diamond";
+                            break;
+                    }
+                    cards.Add(new Card {ID = cardName + cardSuit, name = cardFullName});
                 }
             }
         }
