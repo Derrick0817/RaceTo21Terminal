@@ -75,10 +75,10 @@ namespace RaceTo21
             // (this should be easier to understand)
             for (int i=0; i<cards.Count; i++)
             {
-                string tmp = cards[i].ID;
+                Card tmp = cards[i];
                 int swapindex = rng.Next(cards.Count);
                 cards[i] = cards[swapindex];
-                cards[swapindex].ID = tmp;
+                cards[swapindex] = tmp;
             }
         }
 
@@ -105,10 +105,10 @@ namespace RaceTo21
 
         public string DealTopCard()
         {
-            string card = cards[cards.Count - 1].ID;
+            Card card = cards[cards.Count - 1];
             cards.RemoveAt(cards.Count - 1);
             // Console.WriteLine("I'm giving you " + card);
-            return card;
+            return card.ID;
         }
     }
 }
