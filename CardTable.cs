@@ -121,5 +121,27 @@ namespace RaceTo21
             Console.Write("Press <Enter> to exit... ");
             while (Console.ReadKey().Key != ConsoleKey.Enter) { }
         }
+
+        public bool AskIfContinue(Player player)
+        {
+            while (true)
+            {
+                Console.WriteLine(player.name + ", do you want to continue? (Y/N)");
+                string response = Console.ReadLine();
+                if (response.ToUpper().StartsWith("Y"))
+                {
+                    return true;
+                }
+                else if (response.ToUpper().StartsWith("N"))
+                {
+                    return false;
+
+                }
+                else
+                {
+                    Console.WriteLine("Please answer Y(es) or N(o)!");
+                }
+            }
+        }
     }
 }

@@ -107,8 +107,39 @@ namespace RaceTo21
                     if (currentPlayer > players.Count - 1)
                     {
                         currentPlayer = 0; // back to the first player...
+                        nextTask = Task.CheckForNextTurn; //Ask if continue after checking for end
                     }
+                    else 
+                    { 
+                        nextTask = Task.PlayerTurn; 
+                    }
+                }
+            }
+            else if (nextTask == Task.CheckForNextTurn)
+            {
+                Player player = players[currentPlayer];
+                if (cardTable.AskIfContinue(player))
+                {
+                    currentPlayer++;
+                }
+                else
+                {
+                    players.Remove(player);
+                    if (players.Count == 1)
+                    {
+                        cardTable.AnnounceWinner(players[0]);
+                        nextTask = Task.GameOver;
+                    }
+                    
+                }
+                if (currentPlayer > players.Count - 1)
+                {
+                    currentPlayer = 0;
                     nextTask = Task.PlayerTurn;
+                }
+                else
+                {
+                    nextTask = Task.CheckForNextTurn;
                 }
             }
         }

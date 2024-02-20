@@ -17,6 +17,7 @@ namespace RaceTo21
         IntroducePlayers,
         PlayerTurn,
         CheckForEnd,
+        CheckForNextTurn,
         GameOver
     }
 }
