@@ -129,9 +129,9 @@ namespace RaceTo21
                     {
                         cardTable.AnnounceWinner(players[0]);
                         nextTask = Task.GameOver;
-                    }
-                    
+                    }              
                 }
+
                 if (currentPlayer > players.Count - 1)
                 {
                     currentPlayer = 0;
