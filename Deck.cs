@@ -4,10 +4,16 @@ using System.Linq; // currently only needed if we use alternate shuffle method
 
 namespace RaceTo21
 {
+    /// <summary>
+    /// Manages a standard deck of 52 cards, represented as a list of Card instances.
+    /// </summary>
     public class Deck
     {
         List<Card> cards = new List<Card>();
 
+        /// <summary>
+        /// Constructor for an ordered deck of cards.
+        /// </summary>
         public Deck()
         {
             Console.WriteLine("*********** Building deck...");
@@ -18,61 +24,68 @@ namespace RaceTo21
                 foreach (string cardSuit in suits)
                 {
                     string cardName;
-                    string cardFullName;
+                    string cardLongName;
+
                     switch (cardVal)
                     {
                         case 1:
                             cardName = "A";
-                            cardFullName = "Ace of";
+                            cardLongName = "Ace of ";
                             break;
                         case 11:
                             cardName = "J";
-                            cardFullName = "Jack of";
+                            cardLongName = "Jack of ";
                             break;
                         case 12:
                             cardName = "Q";
-                            cardFullName = "Queen of";
+                            cardLongName = "Queen of ";
                             break;
                         case 13:
                             cardName = "K";
-                            cardFullName ="King of";
+                            cardLongName = "King of ";
                             break;
                         default:
                             cardName = cardVal.ToString();
-                            cardFullName = cardVal.ToString() + "of";
+                            cardLongName = cardVal.ToString() + " of ";
                             break;
                     }
+
                     switch (cardSuit)
                     {
                         case "S":
-                            cardFullName += "Spade";
+                            cardLongName += "Spades";
                             break;
                         case "H":
-                            cardFullName += "Heart";
+                            cardLongName += "Hearts";
                             break;
                         case "C":
-                            cardFullName += "Club";
+                            cardLongName += "Clubs";
                             break;
                         case "D":
-                            cardFullName += "Diamond";
+                            cardLongName += "Diamonds";
                             break;
                     }
-                    cards.Add(new Card {ID = cardName + cardSuit, name = cardFullName});
+                    cards.Add(new Card {ID = cardName + cardSuit, name = cardLongName});
                 }
             }
         }
 
+        /// <summary>
+        /// Randomly swap cards to shuffle the deck.
+        /// </summary>
         public void Shuffle()
         {
             Console.WriteLine("Shuffling Cards...");
 
-            Random rng = new Random();
+            Random rng = new Random(); // rng is short for "Random Number Generator"
 
-            // one-line method that uses Linq:
+            // one-line method that uses Linq
+            // (only uncomment this and comment out the multi-line approach
+            // after you understand this approach!):
             // cards = cards.OrderBy(a => rng.Next()).ToList();
 
-            // multi-line method that uses Array notation on a list!
-            // (this should be easier to understand)
+            // multi-line approach that uses Array notation on a list!
+            // (this should be easier to understand):
             for (int i=0; i<cards.Count; i++)
             {
                 Card tmp = cards[i];
@@ -82,17 +95,20 @@ namespace RaceTo21
             }
         }
 
+
+        /// <summary>
+        /// Shows all cards. Kinda hacky. See comment below.
+        /// </summary>
         /* Maybe we can make a variation on this that's more useful,
          * but at the moment it's just really to confirm that our 
          * shuffling method(s) worked! And normally we want our card 
          * table to do all of the displaying, don't we?!
          */
-
         public void ShowAllCards()
         {
             for (int i=0; i<cards.Count; i++)
             {
-                Console.Write(i+":"+cards[i]); // a list property can look like an Array!
+                Console.Write(i+":"+cards[i].ID); // NOTE: a list property can be accessed by an index just like an Array!
                 if (i < cards.Count -1)
                 {
                     Console.Write(" ");
@@ -102,13 +118,16 @@ namespace RaceTo21
                 }
             }
         }
-
-        public string DealTopCard()
+        /// <summary>
+        /// Remove top card (defined here as last card in the list), an instance of Card
+        /// </summary>
+        /// <returns>the removed instance of Card, representing one of the 52 cards in the deck</returns>
+        public Card DealTopCard()
         {
             Card card = cards[cards.Count - 1];
             cards.RemoveAt(cards.Count - 1);
             // Console.WriteLine("I'm giving you " + card);
-            return card.ID;
+            return card;
         }
     }
 }

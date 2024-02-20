@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace RaceTo21
 {
-    enum Task
+    /// <summary>
+    /// Tracks game state. 
+    /// Replaces less reliable string-based tracking in original.
+    /// </summary>
+    public enum Task
     {
         GetNumberOfPlayers,
         GetNames,
